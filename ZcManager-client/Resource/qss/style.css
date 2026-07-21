@@ -1,0 +1,1103 @@
+﻿/*********************登录**********************/
+#loginWdgt, #regWdgt {
+    background-color: white;
+    border-radius: 15px;
+}
+
+QLineEdit, QComboBox, QSpinBox, DateRangePicker,TagPicker{
+    min-height: 41px;
+    max-height: 41px;
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    font: normal 15px '微软雅黑';
+    placeholder-text-color: #c0c4cc;
+}
+
+QLineEdit:hover, QComboBox:hover, QSpinBox:hover, DateRangePicker:hover,TagPicker:hover {
+    border-color: #c0c4cc;
+}
+
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus, DateRangePicker:focus ,TagPicker:focus{
+    border-color: #1890ff;
+}
+
+
+TagPicker QListView{
+    background-color:white;
+    font:normal 16px '微软雅黑';
+    padding-top:10px;
+}
+
+TagPicker #DropDown{
+    border:none;
+    width:16px;
+    height:16px;
+    image: url(:/Resource/icons/pagin-cbx-arrow-down.svg);
+}
+
+TagPicker #DropDown:checked{
+    image: url(:/Resource/icons/pagin-cbx-arrow-up.svg);
+}
+
+
+#rememberPwdChx {
+    color: #606266;
+}
+
+#rememberPwdChx:checked {
+    color: #1890ff;
+}
+
+/*#rememberPwdChx::indicator {
+    image: url(:/Resource/icons/chx-unchecked.svg);
+    width: 16px;
+    height: 16px;
+}
+
+#rememberPwdChx::indicator:hover {
+    image: url(:/Resource/icons/chx-unchecked-hover.svg);
+}
+
+#rememberPwdChx::indicator:checked {
+    image: url(:/Resource/icons/chx-checked.svg);
+}
+*/
+
+#loginBtn, #reg_regBtn {
+    height: 41px;
+    border-radius: 5px;
+    background-color: #1890ff;
+    color: white;
+    font: normal 15px '微软雅黑';
+}
+
+#loginBtn:hover, #reg_regBtn:hover {
+    background-color: #46a6ff;
+}
+
+#loginBtn:pressed, #reg_regBtn:pressed {
+    background-color: #1682e6;
+}
+
+#goRegBtn, #goLoginBtn {
+    border: none;
+    color: #1890ff;
+}
+
+/*********************HomePage*********************/
+#topBar, #stackedWidget .QWidget {
+    background-color: white;
+}
+
+#topBar {
+    border-bottom: 1px solid rgb(220, 223, 230)
+}
+
+#personalBtn {
+    background: transparent;
+    border: none;
+}
+
+#personalBtn:hover {
+    background-color: rgb(249, 249, 249);
+}
+
+#goHomeBtn {
+    border: none;
+    color: #303133;
+    font: normal 15px '微软雅黑';
+}
+
+#goHomeBtn:hover {
+    color: #1890ff;
+}
+
+#navLocationLab {
+    color: rgb(151, 168, 190);
+    font: normal 15px '微软雅黑';
+}
+
+
+#navTreeView {
+    background-color: #304156;
+}
+
+#navTreeView::item {
+    background-color: #304156;
+    height: 50px;
+    color: white;
+}
+
+#navTreeView::item:hover {
+    background-color: #2d3d51;
+}
+
+#navTreeView QHeaderView::section {
+    background-color: #304156;
+    height: 55px;
+    color: white;
+    font: bold 15px '微软雅黑';
+    border: none;
+    padding-left: 50px;
+}
+
+
+
+/*******************BaseProfile**********************/
+
+#tabWdget {
+    border-bottom: 2px solid #dfe4ed;
+}
+
+#baseProfileBtn, #alterPwdBtn {
+    border: none;
+    font-size: 16px;
+}
+
+#baseProfileBtn:checked, #alterPwdBtn:checked {
+    color: #1890ff;
+    border-bottom: 2px solid #1890ff;
+}
+
+#baseProfileBtn:hover, #alterPwdBtn:hover {
+    color: #1890ff;
+}
+
+#saveBtn, #offBtn {
+    border: none;
+    border-radius: 5px;
+    width: 60px;
+    height: 30;
+    color: white;
+    font-size: 15px;
+    font-family: '微软雅黑';
+    font-weight: bold;
+}
+
+#saveBtn {
+    background-color: #1890ff;
+}
+
+#saveBtn:hover {
+    background-color: #46a6ff;
+}
+
+#saveBtn:pressed {
+    background-color: #1682e6;
+}
+
+#offBtn {
+    background-color: #ff4949;
+}
+
+#offBtn:hover {
+    background-color: #ff6d6d;
+}
+
+#offBtn:pressed {
+    background-color: #e64242;
+}
+/****************PersonalInfo*************************/
+#avatarWdgt {
+    border-top: 1px solid rgb(220, 223, 230);
+}
+
+#kvWdgt .QWidget {
+    border-top: 1px solid rgb(220, 223, 230);
+    min-height: 44px;
+    max-height: 44px;
+}
+
+#kvWdgt QPushButton {
+    border: none;
+}
+
+#createTimeWdgt {
+    border-bottom: 1px solid rgb(220, 223, 230);
+}
+
+/*******************AvatarChoose***********************/
+#closeBtn {
+    width: 22px;
+    height: 22px;
+}
+
+#chooseBtn, #zoomInBtn, #zoomOutBtn, #leftRotateBtn, #rightRotateBtn {
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    color: #6e7073;
+    icon-size: 24px;
+}
+
+#chooseBtn:hover, #zoomInBtn:hover, #zoomOutBtn:hover, #leftRotateBtn:hover, #rightRotateBtn:hover {
+    border: 1px solid #badeff;
+    background-color: #e8f4ff;
+    color: #1890ff;
+}
+
+#chooseBtn:pressed, #zoomInBtn:pressed, #zoomOutBtn:pressed, #leftRotateBtn:pressed, #rightRotateBtn:pressed {
+    border-color: #1682e6;
+}
+
+#commitBtn {
+    border: none;
+    background-color: #1890ff;
+    border-radius: 5px;
+    color: white;
+    font: bold 13px '微软雅黑';
+}
+
+#commitBtn:hover {
+    background-color: #46a6ff;
+}
+
+#commitBtn:pressed {
+    background-color: #1682e6;
+}
+
+#zoomInBtn {
+    icon: url(:/Resource/icons/zoomIn.svg);
+}
+
+#zoomInBtn:hover {
+    icon: url(:/Resource/icons/zoomIn-hover.svg);
+}
+
+#zoomOutBtn {
+    icon: url(:/Resource/icons/zoomOut.svg);
+}
+
+#zoomOutBtn:hover {
+    icon: url(:/Resource/icons/zoomOut-hover.svg);
+}
+
+#leftRotateBtn {
+    icon: url(:/Resource/icons/rotate-left.svg);
+}
+
+#leftRotateBtn:hover {
+    icon: url(:/Resource/icons/rotate-left-hover.svg);
+}
+
+#rightRotateBtn {
+    icon: url(:/Resource/icons/rotate-right.svg);
+}
+
+#rightRotateBtn:hover {
+    icon: url(:/Resource/icons/rotate-right-hover.svg);
+}
+
+/*******************MenuMgrPage*******************/
+#searchBtn, #resetBtn, #addBtn {
+    min-width: 80px;
+    height: 32px;
+}
+
+#searchBar #searchBtn {
+    background-color: #1890ff;
+    border-radius: 5px;
+    color: white;
+    font: bold 15px '黑体';
+    icon: url(:/Resource/icons/search.svg);
+}
+
+#searchBar .QLabel {
+    color: #606266;
+    font: bold 15px '黑体';
+}
+
+#searchBar QLineEdit, #searchBar QComboBox{
+    min-width: 227px;
+    max-width: 227px;
+    min-height: 36px;
+    max-height: 36px;
+}
+
+#searchBar DateRangePicker {
+    min-width: 265px;
+    max-width: 265px;
+    min-height: 36px;
+    max-height: 36px;
+}
+DateRangePicker #startEdit,DateRangePicker #endEdit{
+    min-width:70px;
+    max-width:70px;
+}
+
+#searchBar #searchBtn:hover {
+    background-color: #46a6ff;
+}
+
+#searchBar #searchBtn:pressed {
+    background-color: #1682e6;
+}
+
+
+#searchBar #resetBtn {
+    background-color: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    color: #6a7174;
+    font: bold 15px '黑体';
+    icon: url(:/Resource/icons/reset.svg);
+}
+
+#searchBar #resetBtn:hover {
+    background-color: #e8f4ff;
+    color: #248be7;
+    border-color: #badeff;
+    icon: url(:/Resource/icons/reset-hover.svg);
+}
+
+#searchBar #resetBtn:pressed {
+    border: 1px solid #1682e6;
+}
+
+#toolBar #addBtn {
+    background-color: #e8f4ff;
+    border: 1px solid #a3d3ff;
+    border-radius: 5px;
+    color: #248be7;
+    font: bold 15px '黑体';
+    icon: url(:/Resource/icons/add-hover.svg);
+}
+
+#toolBar #addBtn:hover {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    icon: url(:/Resource/icons/add.svg);
+}
+
+#toolBar #addBtn:pressed {
+    background-color: #1682e6;
+}
+
+#toolBar #expandBtn {
+    background-color: #f4f4f5;
+    border: 1px solid #d3d4d6;
+    border-radius: 5px;
+    color: #969a9e;
+    font: bold 15px '黑体';
+    width: 110px;
+    height: 32px;
+    icon: url(:/Resource/icons/expand.svg);
+}
+
+#toolBar #expandBtn:hover {
+    background-color: #909399;
+    color: white;
+    border: none;
+    icon: url(:/Resource/icons/expand-hover.svg);
+}
+
+#toolBar #expandBtn:pressed {
+    background-color: #82848a;
+}
+
+#toolBar #hideSearchBarBtn, #refreshBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    border: 1px solid #dfe2e8;
+    background-color: white;
+}
+
+#toolBar #hideSearchBarBtn:hover, #refreshBtn:hover {
+    background-color: #e8f4ff;
+}
+
+#toolBar #hideSearchBarBtn:pressed, #refreshBtn:pressed {
+    border-color: #1883e6;
+}
+
+#toolBar #hideSearchBarBtn {
+    icon: url(:/Resource/icons/search-gray.svg);
+}
+
+#toolBar #hideSearchBarBtn:hover {
+    icon: url(:/Resource/icons/search-hover.svg);
+}
+
+#toolBar #refreshBtn {
+    icon: url(:/Resource/icons/reset.svg);
+}
+
+#toolBar #refreshBtn:hover {
+    icon: url(:/Resource/icons/reset-hover.svg);
+}
+
+
+#statusCbx::drop-down {
+    min-width: 32px;
+    border: none;
+}
+
+#statusCbx QPushButton {
+    border: none;
+    icon: url(:/Resource/icons/arrow-down.svg);
+    icon-size: 24px;
+}
+
+#statusCbx QPushButton[state='off'] {
+    icon: url(:/Resource/icons/arrow-down.svg);
+}
+
+#statusCbx QPushButton[state='on'] {
+    icon: url(:/Resource/icons/arrow-up.svg);
+}
+
+#statusCbx QPushButton[state='clear'] {
+    icon: url(:/Resource/icons/clear.svg);
+}
+
+/********************UserMgrPage************************/
+#searchBtn,#resetBtn,#addBtn,#alterBtn,#delBtn,#importBtn,#exportBtn{
+	min-width:80px;
+	height:32px;
+}
+
+#searchBar #searchBtn{
+	background-color:#1890ff;
+	border-radius:5px;
+	color:white;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/search.svg);
+}
+
+#searchBar QLabel{
+	color:#606266;
+	font:bold 15px '黑体';
+}
+
+
+#searchBar #searchBtn:hover{
+	background-color:#46a6ff;
+}
+
+#searchBar #searchBtn:pressed{
+	background-color:#1682e6;
+}
+
+
+#searchBar #resetBtn{
+	background-color:#ffffff;
+	border:1px solid #dcdfe6;
+	border-radius:5px;
+	color:#6a7174;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/reset.svg);
+}
+
+#searchBar #resetBtn:hover{
+	background-color:#e8f4ff;
+	color:#248be7;
+	border-color:#badeff;
+	icon: url(:/Resource/icons/reset-hover.svg);
+}
+
+#searchBar #resetBtn:pressed{
+	border:1px solid #1682e6;
+}
+
+#toolBar #addBtn{
+	background-color:#e8f4ff;
+	border:1px solid #a3d3ff;
+	border-radius:5px;
+	color:#248be7;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/add-hover.svg);
+}
+
+#toolBar #addBtn:hover{
+	background-color:#1890ff;
+	color:white;
+	border:none;
+	icon: url(:/Resource/icons/add.svg);
+}
+
+#toolBar #addBtn:pressed{
+	background-color:#1682e6;
+}
+
+#toolBar #alterBtn:disabled{
+	background-color:#e7faf0;
+	border:1px solid #d0f5e0;
+	color:#7ce3a8;
+	icon: url(:/Resource/icons/alter.svg);
+}
+
+#toolBar #alterBtn{
+	background-color:#e7faf0;
+	border:1px solid #a1ebc2;
+	border-radius:5px;
+	color:#5ece8e;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/alter.svg);
+}
+
+#toolBar #alterBtn:hover{
+	background-color:#13ce66;
+	color:white;
+	border:none;
+	icon: url(:/Resource/icons/alter-hover.svg);
+}
+
+#toolBar #alterBtn:pressed{
+	background-color:#11b95c;
+}
+
+#toolBar #delBtn:disabled{
+	background-color:#ffeded;
+	border:1px solid #ffdbdb;
+	color:#ff9a98;
+	icon: url(:/Resource/icons/del.svg);
+}
+
+#toolBar #delBtn{
+	background-color:#ffeded;
+	border:1px solid #ffb6b6;
+	border-radius:5px;
+	color:#ff5b58;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/del.svg);
+}
+
+#toolBar #delBtn:hover{
+	background-color:#ff4949;
+	color:white;
+	border:none;
+	icon: url(:/Resource/icons/del-hover.svg);
+}
+
+#toolBar #delBtn:pressed{
+	background-color:#e64242;
+}
+
+#toolBar #importBtn{
+	background-color:#f4f4f5;
+	border:1px solid #d3d4d6;
+	border-radius:5px;
+	color:#969a9e;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/import.svg);
+}
+
+#toolBar #importBtn:hover{
+	background-color:#909399;
+	color:white;
+	border:none;
+	icon: url(:/Resource/icons/import-hover.svg);
+}
+
+#toolBar #importBtn:pressed{
+	background-color:#82848a;
+}
+
+#toolBar #exportBtn{
+	background-color:#fff8e6;
+	border:1px solid #ffe399;
+	border-radius:5px;
+	color:#ffc859;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/export.svg);
+}
+
+#toolBar #exportBtn:hover{
+	background-color:#ffba00;
+	color:white;
+	border:none;
+	icon: url(:/Resource/icons/export-hover.svg);
+}
+
+#toolBar #exportBtn:pressed{
+	background-color:#e6a700;
+}
+
+/*******************RoleAddDlg***********************/
+#menuTreeSelectView{
+    border:1px solid #dcdfe6;
+    border-radius:5px;
+}
+
+#menuTreeSelectView::item{
+    border: none;
+    height: 30px;
+}
+
+/**************AssignUserRolePage**************/
+#toolBar #addUserBtn{
+	background-color:#e8f4ff;
+	border:1px solid #a3d3ff;
+	border-radius:5px;
+	color:#248be7;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/add-hover.svg);
+    width:107px;
+    height:30px;
+}
+
+#toolBar #addUserBtn:hover{
+	background-color:#1890ff;
+	color:white;
+	border:none;
+	icon: url(:/Resource/icons/add.svg);
+}
+
+#toolBar #addUserBtn:pressed{
+	background-color:#1682e6;
+}
+
+#toolBar #delBtn:disabled{
+	background-color:#ffeded;
+	border:1px solid #ffdbdb;
+	color:#ff9a98;
+	icon: url(:/Resource/icons/del.svg);
+}
+
+#toolBar #cancelAuthBtn{
+	background-color:#ffeded;
+	border:1px solid #ffb6b6;
+	border-radius:5px;
+	color:#ff5b58;
+	font:bold 15px '黑体';
+	icon: url(:/Resource/icons/del.svg);
+    width:134px;
+    height:30px;
+}
+
+#toolBar #cancelAuthBtn:hover {
+    background-color: #ff4949;
+    color: white;
+    border: none;
+    icon: url(:/Resource/icons/del-hover.svg);
+}
+
+#toolBar #cancelAuthBtn:pressed {
+    background-color: #e64242;
+}
+
+#toolBar #shutBtn {
+    background-color: #fff8e6;
+    border: 1px solid #ffe399;
+    border-radius: 5px;
+    color: #ffc859;
+    font: bold 15px '黑体';
+    icon: url(:/Resource/icons/export.svg);
+    width: 80px;
+    height: 30px;
+}
+
+#toolBar #shutBtn:hover {
+    background-color: #ffba00;
+    color: white;
+    border: none;
+    icon: url(:/Resource/icons/export-hover.svg);
+}
+
+#toolBar #shutBtn:pressed {
+    background-color: #e6a700;
+}
+
+
+
+/** QPlainTextEdit 普通文本编辑器 */
+QPlainTextEdit {
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    font: normal 15px '微软雅黑';
+    placeholder-text-color: #c0c4cc;
+}
+
+
+/********************公用******************/
+#container {
+    background-color: white;
+    border-radius: 10px;
+}
+
+#closeBtn {
+    image: url(:/Resource/icons/close.svg);
+    border: none;
+}
+
+#closeBtn:hover {
+    image: url(:/Resource/icons/close-hover.svg);
+}
+
+/**如果按钮设置了菜单，则把下三角去掉*/
+QPushButton::menu-indicator {
+    width: 0;
+}
+
+/**QCheckBox*/
+QCheckBox::indicator {
+    image: url(:/Resource/icons/chx-unchecked.svg);
+    width: 16px;
+    height: 16px;
+}
+
+QCheckBox::indicator:hover {
+    image: url(:/Resource/icons/chx-unchecked-hover.svg);
+}
+
+QCheckBox::indicator:checked {
+    image: url(:/Resource/icons/chx-checked.svg);
+}
+
+/**菜单*/
+QMenu {
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #dcdfe6;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+QMenu::item {
+    color: #606266;
+}
+
+QMenu::item:selected {
+    color: #46a6ff;
+    background-color: #e8f4ff;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: #dcdfe6;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+
+/**垂直滚动条*/
+
+QScrollBar:vertical {
+    background: transparent; /*背景透明*/
+    width: 8px;
+    background-color: #e8e8ec;
+}
+
+QScrollBar::handle:vertical {
+    background: rgb(173,170,169); /*滑块颜色*/
+    min-height: 20px;
+    border-radius: 4px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+    border: none;
+    background: transparent;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: transparent;
+}
+
+
+/**QComboBox 下拉框样式*/
+QComboBox QAbstractItemView {
+    border: 1px solid #dfe4ed;
+    outline: 0px;
+    selection-background-color: red;
+}
+
+QComboBox QAbstractItemView::item {
+    height: 38px;
+    color: #606266;
+    background-color: white;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    background-color: #f5f7fa;
+}
+
+QComboBox:drop-down{
+	border:none;
+	margin-right:10px;
+}
+
+QComboBox::down-arrow{
+	border-image:url(:/Resource/icons/arrow-down.svg)
+}
+
+QComboBox::down-arrow:on{
+	border-image:url(:/Resource/icons/arrow-up.svg)
+}
+
+/** QSpinBox 下拉框样式*/
+QSpinBox:up-button{
+	border:none;
+	background-color:#f5f7fa;
+	border-left:1px solid #dcdfe6;
+	border-bottom:1px solid #dcdfe6;
+	border-top-right-radius:5px;
+}
+
+QSpinBox:down-button{
+	border:none;
+	background-color:#f5f7fa;
+	border-left:1px solid #dcdfe6;
+	border-bottom-right-radius:5px;
+}
+
+QSpinBox:up-arrow{
+	image:url(:/Resource/icons/arrow-up.svg);
+	width:16px;
+	height:16px;
+}
+
+QSpinBox:down-arrow{
+	image:url(:/Resource/icons/arrow-down.svg);
+	width:16px;
+	height:16px;
+}
+
+
+
+/***********QTreeView*********/
+QTreeView {
+    alternate-background-color: rgb(246,246,246);
+    background-color: white;
+    show-decoration-selected: 1; /*设计item一行中的branch和item为一个整体，默认为0*/
+    font: normal 13pt "微软雅黑";
+    outline: 0px;
+}
+
+QTreeView QHeaderView::section {
+    border: none;
+    border-bottom: 1px solid rgb(223, 230, 236);
+    background-color: rgb(248, 248, 249);
+    font: bold 10pt "微软雅黑";
+    height: 50px;
+}
+
+QTreeView::item {
+    border: none;
+    border-bottom: 1px solid rgb(223, 230, 236);
+    height: 55px;
+}
+
+/*--鼠标悬停*/
+QTreeView::item:hover,
+QTreeView::branch:hover {
+    background-color: rgb(210,210,210);
+}
+
+/*--选中item时，item和前面的branch显示一样的颜色*/
+QTreeView::item:selected,
+QTreeView::branch:selected {
+    background-color: rgb(123,123,123);
+}
+
+/*--鼠标悬停，并选中*/
+QTreeView::item:selected:hover,
+QTreeView::branch:selected:hover {
+    background-color: rgb(210,210,210);
+}
+
+
+/*****************QTableview******************/
+QTableView {
+    background-color: white;
+    outline: 0px;
+}
+
+QTableView::item {
+    border-bottom: 1px solid #dfe6ec;
+    height: 55px;
+}
+
+QTableView::item:hover {
+    background-color: azure;
+}
+
+QTableView QHeaderView::section {
+    border: none;
+    border-bottom: 1px solid #dfe6ec;
+    background-color: rgb(248, 248, 249);
+    font: bold 10pt "微软雅黑";
+    height: 50px;
+}
+
+/*QTableView::indicator{
+	border:1px solid blue;
+}*/
+
+
+
+/******************ToolTip******************/
+QToolTip {
+    background-color: rgb(48, 49, 51);
+    border-radius: 5px;
+    color: white;
+}
+
+/****************弹出对话框*******************/
+#okBtn, #cancelBtn {
+    border: none;
+    border-radius: 5px;
+    width: 60px;
+    height: 30;
+    color: white;
+    font-size: 15px;
+    font-family: '微软雅黑';
+    font-weight: bold;
+}
+
+#okBtn {
+    background-color: #1890ff;
+}
+
+#okBtn:hover {
+    background-color: #46a6ff;
+}
+
+#okBtn:pressed {
+    background-color: #1682e6;
+}
+
+#cancelBtn {
+    background-color: #ffffff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+}
+
+#cancelBtn:hover {
+    background-color: #e8f4ff;
+    border-color: #badeff;
+    color: #1890ff;
+}
+
+#cancelBtn:pressed {
+    border-color: #1682e6;
+}
+
+DropDown #container {
+    border: 1px solid #dcdfe6;
+    border-bottom-right-radius: 0px;
+}
+
+/**************************************/
+PaginationToolBar {
+    background-color: white;
+}
+
+PaginationToolBar QPushButton {
+    width: 28px;
+    height: 28px;
+    background-color: #f4f4f5;
+    color: #606266;
+    border-radius: 2px;
+    font: bold 10pt 'Arial';
+}
+
+PaginationToolBar QPushButton:hover {
+    color: #1890ff;
+}
+
+PaginationToolBar QPushButton:checked {
+    background-color: #1890ff;
+    color: white;
+}
+
+PaginationToolBar QLabel {
+    color: #606266;
+}
+
+PaginationToolBar QLineEdit {
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    min-height: 28px;
+    max-height: 28px;
+    min-width: 46px;
+    max-width: 46px;
+}
+
+PaginationToolBar QComboBox {
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    min-height: 28px;
+    max-height: 28px;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+PaginationToolBar QComboBox:hover, QComboBox:focus {
+    border-color: #1890ff;
+}
+
+PaginationToolBar QLineEdit:hover {
+    border-color: #c0c4cc;
+}
+
+PaginationToolBar QLineEdit:focus {
+    border-color: #1890ff;
+}
+
+PaginationToolBar QComboBox QAbstractItemView {
+    background-color: white;
+    border: 1px solid #dfe4ed;
+    border-radius2px;
+    outline: 0px;
+}
+
+PaginationToolBar QComboBox QAbstractItemView::item {
+    background-color: white;
+    height: 34px;
+    color: #606266;
+}
+
+PaginationToolBar QComboBox QAbstractItemView::item:hover {
+    background-color: #f5f7fa;
+}
+
+PaginationToolBar QComboBox QAbstractItemView::item:selected {
+    color: #1890ff;
+}
+
+PaginationToolBar QComboBox::drop-down {
+    border: none;
+    padding-right: 5px;
+}
+
+PaginationToolBar QComboBox::down-arrow {
+    image: url(:/Resource/icons/pagin-cbx-arrow-down.svg);
+}
+
+PaginationToolBar QComboBox::down-arrow:on {
+    image: url(:/Resource/icons/pagin-cbx-arrow-up.svg);
+}
+
+/**QTabWidget*/
+QTabWidget:pane{
+	top:6px;
+    border-top:1px solid #d8dce5;
+}
+QTabWidget::tab-bar{
+	left:4px;
+	top:3px;
+}
+
+QTabBar::tab{
+	background-color:white;
+	padding-left:10px;	
+	padding-right:10px;	
+	height:29px;
+	margin-left:5px;
+	border:1px solid #d8dce5;
+}
+
+QTabBar::tab:selected{
+	background-color:#409eff;
+	color:white;
+}
+
+QTabBar::close-button{
+	image:url(:/Resource/icons/tag-picker-tag-close.svg);
+}
+
+QTabBar::close-button:hover{
+	image:url(:/Resource/icons/tag-picker-tag-close-hover.svg);
+}

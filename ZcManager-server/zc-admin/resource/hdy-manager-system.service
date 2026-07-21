@@ -1,0 +1,14 @@
+﻿[Unit]
+Description=My C++ HDY MANGER SYSTEM Web Server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/zc-manager-system/Zc-Manager-server
+WorkingDirectory=/usr/local/bin/zc-manager-system
+Restart=always
+User=www-data
+Group=www-data
+
+[Install]
+WantedBy=multi-user.target
