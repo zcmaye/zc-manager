@@ -1,10 +1,12 @@
 ﻿#pragma once
 
 #include "common/base/TypeTraits.h"
-#include "sw/redis++/redis++.h"
 #include "nlohmann/json.hpp"
 #include "framework/context/ContextHolder.h"
 #include <sstream>
+
+#ifdef USE_REDIS_CACHE
+#include "sw/redis++/redis++.h"
 
 class RedisCache {
 	std::shared_ptr<sw::redis::Redis> m_redis;
@@ -135,3 +137,4 @@ public:
 		return result;
 	}
 };
+#endif

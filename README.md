@@ -49,12 +49,13 @@ Zc管理系统是一个完全基于 C++ 技术栈开发的企业级管理系统�
 | libhv | - | 高性能 HTTP 服务器库 |
 | MySQL | 8.0+ | 关系型数据库 |
 | Redis | 6.0+ | 缓存数据库（可选） |
+| OpenSSL | 3.0+ | 加密库，用于 TLS/SSL 支持 |
 | nlohmann-json | 3.12+ | JSON 处理库 |
-| mysql-connector-c++ | 8.0+ | MySQL C++ 连接器 |
+| mysql-connector-c++ | 9.2+ | MySQL C++ 连接器 |
 | hiredis / redis++ | - | Redis 连接器 |
 | SqlBuilder | - | SQL 语句生成器 |
 | C++ | 20 | 编程语言 |
-| CMake | 3.10+ | 构建工具 |
+| CMake | 3.16+ | 构建工具 |
 
 ---
 
@@ -180,6 +181,7 @@ ZcManager-Qt/
 - **CMake**：3.16+
 - **MySQL**：8.0+（服务器）
 - **Redis**：6.0+（可选，服务器）
+- **OpenSSL**：3.0+（服务器，必需）
 
 ### 步骤 1：克隆项目
 
@@ -283,6 +285,34 @@ ZcManager-client/out/build/debug/Zc-Manager-client.exe
 
 ```bash
 cmake -DUSE_REDIS_CACHE=ON ..
+```
+
+### OpenSSL 配置（必需）
+
+服务器依赖 OpenSSL 进行加密操作，需要确保 OpenSSL 已正确安装并配置。
+
+**Windows 环境**：
+
+1. 下载 OpenSSL 安装包：https://slproweb.com/products/Win32OpenSSL.html
+2. 安装时选择 "Copy OpenSSL DLLs to the Windows system directory" 或记住安装路径
+3. 如果**安装到非默认路径**，需要设置环境变量（经过测试会自动设置）：
+   ```bash
+   set OPENSSL_ROOT_DIR=F:\Tools\OpenSSL-Win64
+   set OPENSSL_INCLUDE_DIR=F:\Tools\OpenSSL-Win64\include
+   set OPENSSL_LIB_DIR=F:\Tools\OpenSSL-Win64\lib\VC\x64\MD
+   ```
+
+**Linux 环境**：
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install libssl-dev
+
+# CentOS/RHEL
+sudo yum install openssl-devel
+
+# Fedora
+sudo dnf install openssl-devel
 ```
 
 ---

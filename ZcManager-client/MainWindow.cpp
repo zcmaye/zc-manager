@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui->setupUi(this);
 	setAttribute(Qt::WA_StyledBackground);
+	setWindowTitle("ZcManager-");
 
     NotifyTipManager::instance()->setViewPort(this);
     OverlayWidget::instance()->setViewPort(this);

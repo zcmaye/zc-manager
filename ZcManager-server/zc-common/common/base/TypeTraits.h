@@ -5,6 +5,7 @@
 #include <map>
 #include <unordered_map>
 #include <vector>
+#include <memory>
 
 namespace zc{
 	// ========== 定义容器判定特性（确保排除string） ==========

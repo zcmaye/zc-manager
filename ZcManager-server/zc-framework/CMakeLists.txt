@@ -1,28 +1,9 @@
-﻿#最小cmake版本
-cmake_minimum_required (VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
-#项目名称
-project(zc-framework)
-
-#请求C++标准
-set(CMAKE_CXX_STANDARD 20) 
-set(CMAKE_CXX_STANDARD_REQUIRED ON)	#强制请求，如果不支持C++20 则报错 
-
-#添加编译选项
-if(MSVC)
-	add_compile_options("/utf-8")
-endif()
+project(zc-framework LANGUAGES CXX)
 
 #查找包
 find_package(libhv REQUIRED)
-
-
-#添加头文件包含目录
-include_directories(${CMAKE_INCLUDE_PATH})
-#添加库文件包含目录
-link_directories(${CMAKE_LIBRARY_PATH})
-
-message("------------" ${CMAKE_LIBRARY_PATH})
 
 # 将源代码添加到此项目的可执行文件。
 set(HEADER_FILES
@@ -41,10 +22,9 @@ set(SOURCE_FILES
 #生成静态库
 add_library(${PROJECT_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
-# TODO: 如有需要，请添加测试并安装目标。
 target_link_libraries(${PROJECT_NAME} PUBLIC 
-hv 
-zc-common
+	hv 
+	zc-common
 )
 
 #给目标添加头文件包含目录

@@ -1,14 +1,10 @@
 ﻿cmake_minimum_required(VERSION 3.16)
 project(Zc-Manager-client LANGUAGES CXX)
 
-#Qxlsx 操作Excel表格的库！
-#MSVC      
-#MinGW
-#cmake -B build ./QXlsx/ -DCMAKE_BUILD_TYPE=Release
-#cmake --build build --target INSTALL       #Debug
-#cmake --build build --config Release --target INSTALL #Release
-#include(qt.cmake)
+#生成编译数据库（用于IDE代码补全）
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+#Qt配置
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -17,8 +13,16 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+#编译选项配置
+if(MSVC)
+    add_compile_options("/utf-8")
+    add_compile_options("/W4")
+endif()
+
+#添加第三方库
 add_subdirectory("./thrid-party/QXlsx")
 
+#查找Qt包
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR}
     COMPONENTS
@@ -26,9 +30,11 @@ find_package(Qt${QT_VERSION_MAJOR}
         Gui
         Widgets
         Network
+    REQUIRED
 )
 qt_standard_project_setup()
 
+#主程序源文件
 set(PROJECT_SOURCES
     main.cpp
     MainWindow.h
@@ -200,11 +206,15 @@ set(PROJECT_SOURCES
 )
 qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
+#目标属性配置
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         WIN32_EXECUTABLE FALSE
+        CXX_STANDARD 20
+        CXX_STANDARD_REQUIRED ON
 )
 
+#链接库
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         Qt::Core
@@ -212,5 +222,12 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Widgets
         Qt::Network
         QXlsx::QXlsx
+)
+
+#安装目标
+install(TARGETS ${PROJECT_NAME}
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
 )
 

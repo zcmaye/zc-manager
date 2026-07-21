@@ -1,37 +1,22 @@
-﻿cmake_minimum_required (VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
-project ("zc-admin")
+project(zc-admin LANGUAGES CXX)
 
-#请求C++标准
-set(CMAKE_CXX_STANDARD 20) 
-set(CMAKE_CXX_STANDARD_REQUIRED ON)	#强制请求，如果不支持C++20 则报错 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)	#自动添加当前目录到include路径
-
-#添加编译选项
-if(MSVC)
-	add_compile_options("/utf-8")
-endif()
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #自动拷贝资源目录
 file(COPY ./resource DESTINATION ${PROJECT_BINARY_DIR})
 
 #将需要的库拷贝到二进制目录
 if(WIN32)
-	file(COPY ${THRID_PARTY_LIB_FILES} DESTINATION ${PROJECT_BINARY_DIR})
-	message(STATUS "copy lib files ${THRID_PARTY_LIB_FILES} to ${PROJECT_BINARY_DIR}")
+	file(COPY ${THIRD_PARTY_LIB_FILES} DESTINATION ${PROJECT_BINARY_DIR})
+	message(STATUS "copy lib files ${THIRD_PARTY_LIB_FILES} to ${PROJECT_BINARY_DIR}")
 endif()
 
 #添加编译时宏
 if(USE_REDIS_CACHE)
 	add_compile_definitions(USE_REDIS_CACHE)
-	#message(STATUS "------------USE_REDIS_CACHE ${USE_REDIS_CACHE}")
 endif()
-
-
-#添加头文件包含目录
-include_directories(${CMAKE_INCLUDE_PATH})
-#添加库文件包含目录
-link_directories(${CMAKE_LIBRARY_PATH})
 
 # 将源代码添加到此项目的可执行文件。
 set(HEADER_FILES
@@ -54,8 +39,10 @@ set(SOURCE_FILES
 	web/controller/system/impl/RoleController.cpp
 )
 
-#生成静态库
 add_executable(Zc-Manager-server ${HEADER_FILES} ${SOURCE_FILES})
 
-# TODO: 如有需要，请添加测试并安装目标。
-target_link_libraries(Zc-Manager-server PUBLIC zc-common zc-system zc-framework)
+target_link_libraries(Zc-Manager-server PUBLIC 
+	zc-common 
+	zc-system 
+	zc-framework
+)

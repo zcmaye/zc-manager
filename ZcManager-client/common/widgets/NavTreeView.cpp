@@ -56,7 +56,7 @@ void NavTreeView::setCurrentNavigation(const QString& name)
 void NavTreeView::test()
 {
 	//-- 头
-	m_model->setHorizontalHeaderItem(0, new QStandardItem(QIcon(":/Resource/images/icon.png"), "学生管理系统"));
+	m_model->setHorizontalHeaderItem(0, new QStandardItem(QIcon(":/Resource/images/icon.png"), "ZcManger--"));
 
 	//-- 首页
 	auto item = new QStandardItem(Utils::SetIconColor(QIcon(":/Resource/icons/svg/dashboard.svg")), "首页");
@@ -113,7 +113,7 @@ void NavTreeView::setRouters(const QList<std::shared_ptr<RouterVo>>& routers)
 	m_model->clear();
 
 	//-- 头
-	m_model->setHorizontalHeaderItem(0, new QStandardItem(QIcon(":/Resource/images/icon.png"), "学生管理系统"));
+	m_model->setHorizontalHeaderItem(0, new QStandardItem(QIcon(":/Resource/images/icon.png"), "ZcManger-"));
 
 	//-- 首页
 	auto item = new QStandardItem(Utils::SetIconColor(QIcon(":/Resource/icons/svg/dashboard.svg")),"首页");

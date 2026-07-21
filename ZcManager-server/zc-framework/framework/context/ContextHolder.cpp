@@ -1,6 +1,8 @@
 ﻿#include "ContextHolder.h"
-#include "sw/redis++/redis++.h"
 #include "../config/AppConfig.h"
+#ifdef USE_REDIS_CACHE
+#include "sw/redis++/redis++.h"
+#endif
 
 ContextHolder* ContextHolder::instance()
 {
@@ -16,6 +18,7 @@ ContextHolder::ContextHolder()
 	auto config = AppConfig::instance();
 
 	//====================初始化redis
+#ifdef USE_REDIS_CACHE
 	//创建选项
 	sw::redis::ConnectionOptions con_opt;
 	con_opt.host = config->get<std::string>("host", "redis", "127.0.0.1");
@@ -31,6 +34,7 @@ ContextHolder::ContextHolder()
 	pool_opt.wait_timeout = std::chrono::seconds(config->get<int>("wait-timeout", "redis", 10));
 
 	redis = std::make_shared<sw::redis::Redis>(con_opt, pool_opt);
+#endif
 
 	//=======================初始化mysql
 	mysql_pool = std::make_shared<zc::mysql::ConnectionPool>(
