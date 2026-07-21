@@ -190,7 +190,41 @@ git clone <repository-url>
 cd ZcManager-Qt
 ```
 
-### 步骤 2：数据库初始化
+### 步骤 2：解压第三方库
+
+由于服务器端的 `third-party` 目录包含大量预编译库文件（MySQL Connector/C++、libhv、hiredis、redis++ 等），为了减小仓库体积，该目录已被打包为 `third-party.7z` 文件。在构建服务器之前，需要先解压此压缩包：
+
+**Windows 环境**：
+
+使用 7-Zip 解压工具，右键点击 `ZcManager-server/third-party.7z`，选择"解压到当前目录"。
+
+**Linux 环境**：
+
+```bash
+cd ZcManager-server
+7z x third-party.7z
+```
+
+#### 第三方库兼容性说明
+
+压缩包中包含的预编译库仅适用于 **Windows x64** 平台：
+
+| 库名称 | 类型 | 跨平台兼容性 |
+|-------|------|------------|
+| `SqlBuilder/` | 源代码 | ✅ 所有平台通用（CMake 构建） |
+| `json-3.12.0/` | 源代码（头文件） | ✅ 所有平台通用 |
+| `mysql-connector-c++-9.2.0-winx64/` | Windows 预编译 | ❌ Linux 需重新编译 |
+| `hv/` | Windows 预编译 | ❌ Linux 需重新编译 |
+| `hiredis/` | Windows 预编译 | ❌ Linux 需重新编译 |
+| `redis++/` | Windows 预编译 | ❌ Linux 需重新编译 |
+
+> **注意**：如果需要在 Linux 或其他平台运行服务器，需要自行编译以下库并替换 `third-party` 目录中的对应文件：
+> - MySQL Connector/C++
+> - libhv
+> - hiredis
+> - redis++
+
+### 步骤 3：数据库初始化
 
 ```bash
 # 创建数据库
@@ -204,7 +238,7 @@ mysql -u root -p zc-manager < ZcManager-server/sql/zc-manager.sql
 mysql -u root -p zc-manager < ZcManager-client/sql/hdy_manager_system.sql
 ```
 
-### 步骤 3：配置服务器
+### 步骤 4：配置服务器
 
 编辑 `ZcManager-server/zc-admin/resource/application.ini`：
 
@@ -228,7 +262,7 @@ password=your_redis_password
 db=0
 ```
 
-### 步骤 4：构建服务器
+### 步骤 5：构建服务器
 
 ```bash
 cd ZcManager-server
@@ -238,7 +272,7 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 cmake --build . --config Debug
 ```
 
-### 步骤 5：构建客户端
+### 步骤 6：构建客户端
 
 ```bash
 cd ZcManager-client
@@ -248,7 +282,7 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 cmake --build . --config Debug
 ```
 
-### 步骤 6：运行
+### 步骤 7：运行
 
 ```bash
 # 启动服务器
@@ -349,10 +383,105 @@ cmake --build build --config Release
 
 **Linux（GCC）**：
 
+> **注意**：在 Linux 环境下构建服务器前，需要先编译第三方库（详见下方"Linux 第三方库编译"章节）。
+
 ```bash
 cd ZcManager-server
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
+```
+
+### Linux 第三方库编译
+
+由于压缩包中仅包含 Windows 预编译库，在 Linux 环境下需要手动编译以下库：
+
+#### 1. MySQL Connector/C++
+
+```bash
+# 安装依赖
+sudo apt-get install libssl-dev libncurses5-dev
+
+# 下载源码
+git clone https://github.com/mysql/mysql-connector-cpp.git
+cd mysql-connector-cpp
+mkdir build && cd build
+
+# 编译安装
+cmake -DCMAKE_BUILD_TYPE=Release -DWITH_JDBC=ON ..
+make -j$(nproc)
+sudo make install
+
+# 复制到 third-party 目录
+cp -r /usr/local/mysql-connector-c++/ ${PROJECT_DIR}/ZcManager-server/third-party/mysql-connector-c++-linux
+```
+
+#### 2. libhv
+
+```bash
+# 下载源码
+git clone https://github.com/ithewei/libhv.git
+cd libhv
+mkdir build && cd build
+
+# 编译安装
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j$(nproc)
+sudo make install
+
+# 复制到 third-party 目录
+cp -r /usr/local/lib/hv/ ${PROJECT_DIR}/ZcManager-server/third-party/hv
+cp /usr/local/include/hv/ ${PROJECT_DIR}/ZcManager-server/third-party/hv/include -r
+```
+
+#### 3. hiredis
+
+```bash
+# 下载源码
+git clone https://github.com/redis/hiredis.git
+cd hiredis
+mkdir build && cd build
+
+# 编译安装
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j$(nproc)
+sudo make install
+
+# 复制到 third-party 目录
+cp /usr/local/lib/libhiredis.so* ${PROJECT_DIR}/ZcManager-server/third-party/hiredis/lib/
+cp -r /usr/local/include/hiredis/ ${PROJECT_DIR}/ZcManager-server/third-party/hiredis/include/
+```
+
+#### 4. redis++
+
+```bash
+# 下载源码
+git clone https://github.com/sewenew/redis-plus-plus.git
+cd redis-plus-plus
+mkdir build && cd build
+
+# 编译安装（需要先安装 hiredis）
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j$(nproc)
+sudo make install
+
+# 复制到 third-party 目录
+cp /usr/local/lib/libredis++.so* ${PROJECT_DIR}/ZcManager-server/third-party/redis++/lib/
+cp -r /usr/local/include/sw/ ${PROJECT_DIR}/ZcManager-server/third-party/redis++/include/
+```
+
+#### 5. 更新 CMake 路径（可选）
+
+如果将库安装到了非标准路径，需要在构建服务器时指定：
+
+```bash
+cd ZcManager-server
+cmake -B build \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DMySQLConnectorCPP_DIR=/path/to/mysql-connector-c++ \
+  -Dlibhv_DIR=/path/to/hv \
+  -Dhiredis_DIR=/path/to/hiredis \
+  -Dredis++_DIR=/path/to/redis++ \
+  ..
 ```
 
 ### CMake 选项
