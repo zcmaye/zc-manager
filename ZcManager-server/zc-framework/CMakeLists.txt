@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 3.16)
+﻿cmake_minimum_required(VERSION 3.16)
 
 project(zc-framework LANGUAGES CXX)
+
+message(STATUS "=======CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 
 #查找包
 find_package(libhv REQUIRED)
