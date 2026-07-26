@@ -96,15 +96,15 @@ public:
 
 	bool batchUserRole(int32_t roleId, const std::vector<int32_t> userIds, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("role_id"_c, "user_id"_c)
 			.values_for(userIds, [roleId](int32_t userId) {
-			return std::vector{ format_value(roleId),format_value(userId) };
-				})
+				return std::vector{ format_value(roleId),format_value(userId) };
+					})
 			.into("sys_user_role")
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -118,15 +118,15 @@ public:
 
 	bool batchUserRole(const ObjectList<SysUserRole>& list, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("role_id"_c, "user_id"_c)
 			.values_for(list, [](const Object<SysUserRole>& ur) {
 			return std::vector{ format_value(ur->role_id),format_value(ur->user_id) };
 				})
 			.into("sys_user_role")
-			.sql();
+			.to_string();
 
 		try
 		{

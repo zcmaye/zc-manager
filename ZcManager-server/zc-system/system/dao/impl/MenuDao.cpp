@@ -47,15 +47,15 @@ public:
 
 	bool insert(const Object<SysMenu>& e, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("menu_name"_c, "parent_id"_c, "order_num"_c, "path"_c, "component"_c,
 			"is_frame"_c, "menu_type"_c, "is_visible"_c, "is_active"_c, "perms"_c, "icon"_c,"create_time"_c, "create_by"_c, "remark"_c)
 			.values(e->menu_name,e->parent_id,e->order_num,e->path,e->component,
-				e->is_frame, e->menu_type, e->is_visible, e->is_active,e->perms,e->icon,now(), e->create_by, e->remark)
+				e->is_frame, e->menu_type, e->is_visible, e->is_active,e->perms,e->icon,fun::now(), e->create_by, e->remark)
 			.into("sys_menu")
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -71,8 +71,8 @@ public:
 
 	int32_t update(const Object<SysMenu>& e, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Update("sys_menu")
 			.set("menu_name"_c = e->menu_name)
@@ -86,10 +86,10 @@ public:
 			("is_active"_c = e->is_active)
 			("perms"_c = e->perms)
 			("icon"_c = e->icon)
-			("update_time"_c = zc::tool::sql::now())
+			("update_time"_c = fun::now())
 			("remark"_c = e->remark)
 			.where("menu_id"_c == e->menu_id)
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -128,14 +128,14 @@ public:
 
 	ObjectList<SysMenu> getMenuList(const Object<SysMenu>& menu, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Select(all)
 			.from("sys_menu")
 			.where("menu_name"_c.like(menu->menu_name) and "is_active"_c == menu->is_active)
 			.order_by("order_num"_c.asc(), "create_by"_c.desc())
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -154,8 +154,8 @@ public:
 
 	ObjectList<SysMenu> getMenuListByUserId(int32_t userId, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Select("menu_id"_c,"parent_id"_c,"menu_name"_c,"path"_c,"component"_c,
 			"is_visible"_c,"is_active"_c,"IFNULL(perms,'')"_c.as("perms"),"is_frame"_c,"menu_type"_c,
@@ -165,7 +165,7 @@ public:
 			.left_join("sys_user_role") .using_("role_id"_c)
 			.where("menu_type"_c.in(std::vector{ "D","M","B"}) and "is_active"_c == true and "user_id"_c == userId)
 			.order_by("parent_id"_c, "order_num"_c)
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -183,8 +183,8 @@ public:
 	}
 	ObjectList<SysMenu> getMenuListByUserId(const Object<SysMenu>& menu, int32_t userId, const zc::mysql::PooledConnection& con)
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Select("menu_id"_c,"parent_id"_c,"menu_name"_c,"path"_c,"component"_c,
 			"is_visible"_c,"is_active"_c,"IFNULL(perms,'')"_c.as("perms"),"is_frame"_c,"menu_type"_c,
@@ -194,7 +194,7 @@ public:
 			.left_join("sys_user_role") .using_("role_id"_c)
 			.where("menu_type"_c.in(std::vector{ "D","M","B"}) and "is_active"_c == menu->is_active and "user_id"_c == userId and "menu_name"_c == menu->menu_name)
 			.order_by("parent_id"_c, "order_num"_c)
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -214,15 +214,15 @@ public:
 
 	std::set<int32_t> getMenuListByRoleId(int32_t roleId, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Select("menu_id"_c)
 			.from("sys_menu")
 			.left_join("sys_role_menu") .using_("menu_id"_c)
 			.where("menu_type"_c.in(std::vector{ "D","M","B" }) and 
 				"role_id"_c == roleId)
-			.sql();
+			.to_string();
 		try
 		{
 			std::unique_ptr<sql::Statement> stmt(con->createStatement());

@@ -56,15 +56,15 @@ public:
 
 	bool batchInsertRoleMenu(int32_t roleId, const std::vector<int>& menuIds, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("role_id"_c,"menu_id"_c)
 			.values_for(menuIds, [roleId](int menuId) {
 					return std::vector{format_value(roleId),format_value(menuId)};
 				})
 			.into("sys_role_menu")
-			.sql();
+			.to_string();
 
 		try
 		{

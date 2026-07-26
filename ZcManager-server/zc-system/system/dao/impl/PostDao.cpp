@@ -41,13 +41,13 @@ public:
 
 	bool insert(const Object<SysPost>& e, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("post_code"_c, "post_name"_c, "post_sort"_c, "is_active"_c, "create_time"_c,"create_by"_c, "remark"_c)
-			.values(e->post_code, e->post_name, e->post_sort, e->is_active, now(), e->create_by, e->remark)
+			.values(e->post_code, e->post_name, e->post_sort, e->is_active, fun::now(), e->create_by, e->remark)
 			.into("sys_post")
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -61,18 +61,18 @@ public:
 
 	int32_t update(const Object<SysPost>& e, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Update("sys_post")
 			.set("post_name"_c = e->post_name)
 			    ("post_sort"_c = e->post_sort)
 			    ("is_active"_c = e->is_active)
 			    ("update_by"_c = e->update_by)
-			    ("update_time"_c = zc::tool::sql::now())
+			    ("update_time"_c = fun::now())
 			    ("remark"_c = e->remark)
 			.where("post_id"_c == e->post_id)
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -111,14 +111,14 @@ public:
 public:
 	ObjectList<SysPost> selectPostList(const Object<SysPost>& post,const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Select(all)
 			.from("sys_post")
 			.where("post_name"_c.like(post->post_name) and "post_code"_c.like(post->post_code) and "is_active"_c == post->is_active)
 			.order_by("post_sort"_c, "create_by"_c.desc())
-			.sql();
+			.to_string();
 
 		try
 		{

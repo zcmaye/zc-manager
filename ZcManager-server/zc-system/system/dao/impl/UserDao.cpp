@@ -92,15 +92,15 @@ public:
 	}
 	bool insert(const Object<SysUser>& e, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("dept_id"_c, "user_name"_c, "nick_name"_c, "password"_c, "email"_c,
 			"phone_number"_c, "sex"_c, "status"_c,"create_time"_c, "create_by"_c, "remark"_c)
 			.values(e->dept_id,e->user_name,e->nick_name,e->password,e->email,
-				e->phone_number,e->sex,e->status,now(),e->create_by,e->remark)
+				e->phone_number,e->sex,e->status,fun::now(),e->create_by,e->remark)
 			.into("sys_user")
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -113,8 +113,8 @@ public:
 	}
 	int32_t update(const Object<SysUser>& e, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Update("sys_user")
 			.set("dept_id"_c = e->dept_id)
@@ -125,11 +125,11 @@ public:
 			    ("sex"_c = e->sex)
 			    ("status"_c = e->status)
 			    ("update_by"_c = e->update_by)
-			    ("update_time"_c = zc::tool::sql::now())
+			    ("update_time"_c = fun::now())
 			    ("remark"_c = e->remark)
 			    ("login_time"_c = e->login_time)
 			.where("id"_c == e->user_id)
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -225,8 +225,8 @@ public:
 public:
 	std::pair<ObjectList<SysUser>, int32_t>selectUserList(const Object<SysUser>& user, int32_t page, int32_t pageSize, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Select(all)
 			.from("sys_user")
@@ -236,7 +236,7 @@ public:
 				and "create_time"_c.between_and(user->params.begTime, user->params.endTime))
 			.order_by("id"_c.desc())
 			.limit((page - 1) * pageSize, pageSize)
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -274,8 +274,8 @@ public:
 
 	std::pair<ObjectList<SysUser>, int32_t> selectAllocatedList(const Object<SysUser>& user, int32_t page, int32_t pageSize, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Select("DISTINCT u.id"_c, "u.user_name"_c, "u.nick_name"_c, "u.email"_c, "u.phone_number"_c, "u.status"_c, "u.create_time"_c)
 			.from("sys_user").as("u")
@@ -285,7 +285,7 @@ public:
 				and "u.user_name"_c.like(user->user_name) and "u.phone_number"_c.like(user->phone_number))
 			.order_by("u.id"_c.desc())
 			.limit((page - 1) * pageSize, pageSize)
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -304,8 +304,8 @@ public:
 	}
 	std::pair<ObjectList<SysUser>, int32_t>  selectUnallocatedList(const Object<SysUser>& user, int32_t page, int32_t pageSize, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto subQuery = Select("u.id"_c)
 			.from("sys_user").as("u")
@@ -322,7 +322,7 @@ public:
 				"u.phone_number"_c.like(user->phone_number))
 			.order_by("u.id"_c.desc())
 			.limit((page - 1) * pageSize, pageSize)
-			.sql();
+			.to_string();
 
 		try
 		{

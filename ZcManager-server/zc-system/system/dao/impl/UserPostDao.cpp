@@ -89,15 +89,15 @@ public:
 	}
 	bool batchUserPost(int32_t userId, const std::vector<int32_t> postIds, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("post_id"_c, "user_id"_c)
 			.values_for(postIds, [userId](int32_t postId) {
 			return std::vector{ format_value(postId),format_value(userId) };
 				})
 			.into("sys_user_post")
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -110,15 +110,15 @@ public:
 	}
 	bool batchUserPost(const std::vector<Object<SysUserPost>>& list, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("post_id"_c, "user_id"_c)
 			.values_for(list, [](const Object<SysUserPost>& up) {
 			return std::vector{ format_value(up->post_id),format_value(up->user_id) };
 				})
 			.into("sys_user_post")
-			.sql();
+			.to_string();
 
 		try
 		{

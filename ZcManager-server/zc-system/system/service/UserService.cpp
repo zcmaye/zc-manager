@@ -117,7 +117,7 @@ Object<SysUser> UserService::insertUser(const Object<SysUser>& user)
 	catch (const std::exception& e) {
 		throw BusinessError("插入用户失败");
 	}
-	return {};
+	return Object<SysUser>();
 }
 
 bool UserService::updateUser(const Object<SysUser>& user)

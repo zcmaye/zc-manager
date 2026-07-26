@@ -44,15 +44,15 @@ public:
 
 	bool insert(const Object<SysDept>& e, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Insert("parent_id"_c, "ancestors"_c, "dept_name"_c, "order_num"_c,
 			"leader"_c, "phone"_c, "email"_c,"is_active"_c,"create_time"_c, "create_by"_c, "remark"_c)
 			.values(e->parent_id,e->ancestors,e->dept_name,e->order_num,
-				e->leader, e->phone, e->email, e->is_active,now(), e->create_by, e->remark)
+				e->leader, e->phone, e->email, e->is_active,fun::now(), e->create_by, e->remark)
 			.into("sys_dept")
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -66,8 +66,8 @@ public:
 
 	int32_t update(const Object<SysDept>& e, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Update("sys_dept")
 			.set("parent_id"_c = e->parent_id)
@@ -78,11 +78,11 @@ public:
 			("email"_c = e->email)
 			("phone"_c = e->phone)
 			("update_by"_c = e->update_by)
-			("update_time"_c = zc::tool::sql::now())
+			("update_time"_c = fun::now())
 			("remark"_c = e->remark)
 			("is_deleted"_c = e->is_deleted)
 			.where("dept_id"_c == e->dept_id)
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -121,14 +121,14 @@ public:
 
 	ObjectList<SysDept> selectDeptList(const Object<SysDept>& dept, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Select(all)
 			.from("sys_dept")
 			.where("dept_name"_c.like(dept->dept_name) and "is_active"_c == dept->is_active	and "is_deleted"_c == false)
 			.order_by("dept_id"_c.desc(), "create_by"_c.desc())
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -168,10 +168,10 @@ public:
 
 	bool updateDeptChildren(const ObjectList<SysDept>& children, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
-		auto col = case_end_for("dept_id", children, [](const Object<SysDept>& dept) {
+		auto col = fun::case_end_for("dept_id", children, [](const Object<SysDept>& dept) {
 				return std::make_pair(
 					format_value(dept->dept_id),
 					format_value(dept->ancestors)
@@ -187,7 +187,7 @@ public:
 		auto query = Update("sys_dept")
 			.set("ancestors"_c = col)
 			.where("dept_id"_c.in(ids))
-			.sql();
+			.to_string();
 
 		try
 		{
@@ -201,13 +201,13 @@ public:
 
 	bool updateParentDeptStatus(const std::vector<int32_t>& parendIds, bool isActive, const zc::mysql::PooledConnection& con) override
 	{
-		using namespace zc::tool::sql;
-		using namespace zc::tool::sql::literals;
+		using namespace zc::sqlbuilder;
+		using namespace zc::sqlbuilder::field_literals;
 
 		auto query = Update("sys_dept")
 			.set("is_active"_c = isActive)
 			.where("dept_id"_c.in(parendIds))
-			.sql();
+			.to_string();
 
 		try
 		{

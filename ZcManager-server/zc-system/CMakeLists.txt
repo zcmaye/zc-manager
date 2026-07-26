@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16)
 
 project(zc-system LANGUAGES CXX)
 
@@ -46,7 +46,7 @@ add_library(${PROJECT_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC 
 	zc-common 
 	zc-framework 
-	SqlBuilder::SqlBuilder
+	SqlBuilder
 )
 
 #给目标添加头文件包含目录
